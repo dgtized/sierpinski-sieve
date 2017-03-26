@@ -1,11 +1,9 @@
 (ns sierpinski-sieve.core
-  (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [devtools.core :as devtools]
+            [reagent.core :as reagent :refer [atom]]))
 
 (enable-console-print!)
-
-(println "This text is printed from src/sierpinski-sieve/core.cljs. Go ahead and edit it and see reloading in action.")
-
-;; define your app data so that it doesn't get over-written on reload
+(devtools/install!)
 
 (defonce app-state (atom {:text "Hello world!"}))
 

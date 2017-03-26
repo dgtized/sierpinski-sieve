@@ -5,10 +5,28 @@
 (enable-console-print!)
 (devtools/install!)
 
-(defonce app-state (atom {:text "Hello world!"}))
+(defonce app-state (atom {}))
 
 (defn hello-world []
-  [:h1 (:text @app-state)])
+  (let [size 400]
+    [:center [:canvas {:width size :height size :id "canvas"}]]))
+
+(defn put-pixel [ctx x y]
+  (doto ctx
+    (.rect x y 1 1)
+    (.fill)))
+
+(defn paint [canvas-id size]
+  (when-let [canvas-element (. js/document getElementById canvas-id)]
+    (when-let [ctx (.getContext canvas-element "2d")]
+      (do
+        (set! (.-fillStyle ctx) "black")
+        (.fillRect ctx 0 0 size size)
+        (set! (.-fillStyle ctx) "white")
+        (doall
+         (for [x (range 100)
+               y (range 10)]
+           (put-pixel ctx x y)))))))
 
 (reagent/render-component [hello-world]
                           (. js/document (getElementById "app")))
@@ -17,4 +35,5 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
+  (paint "canvas" 400)
 )

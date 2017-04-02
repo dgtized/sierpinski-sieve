@@ -47,5 +47,5 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-  (paint "canvas" 400 (take 400 (sieve '(1) 2)))
+  (time (paint "canvas" 400 (take 400 (sieve '(1) 2))))
 )

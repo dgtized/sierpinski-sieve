@@ -16,8 +16,8 @@
     (aset next 0 1)
     (aset next (dec size) 1)
     (doseq [x (range 1 (dec size))]
-      (let [before (nth row (dec x))
-            above (nth row x)]
+      (let [before (aget row (dec x))
+            above (aget row x)]
         (aset next x (mod (+ before above) modulus))))
     next))
 

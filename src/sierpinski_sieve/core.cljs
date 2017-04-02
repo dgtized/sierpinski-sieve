@@ -10,7 +10,7 @@
 (defonce app-state (atom {}))
 
 (defn next-row [modulus row]
-  (let [size (inc (count row))
+  (let [size (inc (alength row))
         next (make-array size)]
     (aset next 0 1)
     (aset next (dec size) 1)
@@ -24,7 +24,7 @@
   (iterate (partial next-row modulus) (into-array initial-state)))
 
 (defn paint-row [ctx y row size]
-  (forloop [(x 0) (< x (count row)) (inc x)]
+  (forloop [(x 0) (< x (alength row)) (inc x)]
      (let [disp-x (+ (* (- size y) 0.5) x)
            value (aget row x)]
        (if (odd? value)

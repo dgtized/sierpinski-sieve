@@ -11,15 +11,18 @@
 (defonce app-state (atom {}))
 
 (defn next-row [modulus row]
-  (into-array
-   (cons 1
-         (for [x (range 1 (inc (count row)))]
-           (let [before (nth row (dec x))
-                 above (nth row x 0)]
-             (mod (+ before above) modulus))))))
+  (let [size (inc (count row))
+        next (make-array size)]
+    (aset next 0 1)
+    (aset next (dec size) 1)
+    (doseq [x (range 1 (dec size))]
+      (let [before (nth row (dec x))
+            above (nth row x)]
+        (aset next x (mod (+ before above) modulus))))
+    next))
 
 (defn sieve [initial-state modulus]
-  (iterate (partial next-row modulus) initial-state))
+  (iterate (partial next-row modulus) (into-array initial-state)))
 
 (defn paint-row [ctx y row size]
   (doseq [[x value] (map-indexed vector row)]

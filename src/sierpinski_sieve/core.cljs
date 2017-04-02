@@ -37,7 +37,7 @@
         (set! (.-fillStyle ctx) "black")
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
-        (doseq [[y row] (reverse (map-indexed vector sieve))]
+        (doseq [[y row] (map-indexed vector sieve)]
           (paint-row ctx y row size))))))
 
 (defn render-canvas [size]

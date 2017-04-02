@@ -9,7 +9,7 @@
 
 (defonce app-state (atom {}))
 
-(defn hello-world []
+(defn render-canvas []
   (let [size 400]
     [:center [:canvas {:width size :height size :id "canvas"}]]))
 
@@ -30,7 +30,7 @@
                y (range 10)]
            (put-pixel ctx x y)))))))
 
-(reagent/render-component [hello-world]
+(reagent/render-component [render-canvas]
                           (. js/document (getElementById "app")))
 
 (defn on-js-reload []

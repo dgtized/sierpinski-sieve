@@ -44,8 +44,9 @@
 (defn main [size]
   (reagent/render [(render-canvas size)]
                   (. js/document (getElementById "app")))
-  (time (blit/paint "canvas" size (take size (sieve '(1) 2))))
-  (time (paint "canvas" size (take size (sieve '(1) 2)))))
+  (time
+   (let [triangle (time (doall (take size (sieve '(1) 2))))]
+     (time (paint "canvas" size triangle)))))
 
 (main 325)
 

@@ -25,10 +25,9 @@
         (set! (.-fillStyle ctx) "black")
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
-        (doall
-         (for [x (range 100)
-               y (range 10)]
-           (put-pixel ctx x y)))))))
+        (doseq [x (range 100)
+                y (range 10)]
+          (put-pixel ctx x y))))))
 
 (reagent/render-component [render-canvas]
                           (. js/document (getElementById "app")))

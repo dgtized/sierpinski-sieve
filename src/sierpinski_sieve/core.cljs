@@ -13,11 +13,6 @@
   (let [size 400]
     [:center [:canvas {:width size :height size :id "canvas"}]]))
 
-(defn put-pixel [ctx x y]
-  (doto ctx
-    (.rect x y 1 1)
-    (.fill)))
-
 (defn next-row [modulus row]
   (for [x (range 0 (inc (count row)))]
     (let [before (nth row (dec x) 0)
@@ -27,6 +22,12 @@
 (defn sieve [initial-state modulus]
   (iterate (partial next-row modulus) initial-state))
 
+(defn paint-row [ctx y row size]
+  (doseq [[x value] (map-indexed vector row)]
+    (let [disp-x (+ (* (- size y) 0.5) x)]
+      (if (odd? value)
+        (.rect ctx disp-x y 1 1)))))
+
 (defn paint [canvas-id size sieve]
   (when-let [canvas-element (. js/document getElementById canvas-id)]
     (when-let [ctx (.getContext canvas-element "2d")]
@@ -34,11 +35,9 @@
         (set! (.-fillStyle ctx) "black")
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
-        (doseq [[y row] (reverse (map-indexed vector sieve))
-                [x value] (map-indexed vector row)]
-          (let [disp-x (+ (* (- size y) 0.5) x)]
-            (if (odd? value)
-              (put-pixel ctx disp-x y))))))))
+        (doseq [[y row] (reverse (map-indexed vector sieve))]
+          (paint-row ctx y row size))
+        (.fill ctx)))))
 
 (reagent/render-component [render-canvas]
                           (. js/document (getElementById "app")))

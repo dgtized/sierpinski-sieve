@@ -42,12 +42,13 @@
         (doseq [[y row] (map-indexed vector sieve)]
           (paint-row ctx y row size))))))
 
-(defn slider [name key value]
+(defn slider [name key value settings]
   [:div
    [:label name
-    [:input {:type "range" :min 2 :max 32 :step 1 :value value
-             :on-change
-             (fn [e] (swap! app-state assoc key (int (.-target.value e))))}]
+    [:input (merge {:value value
+                    :on-change
+                    (fn [e] (swap! app-state assoc key (int (.-target.value e))))}
+                   settings)]
     value]])
 
 (defn render-canvas []
@@ -55,14 +56,8 @@
     [:center
      [:h1 "Sierpinski Triangle"]
      [:canvas {:width size :height size :id "canvas"}]
-     [:div
-      [:label "Size"
-       [:input {:type "range" :min 100 :max 1200 :step 100 :value size
-                :on-change (fn [e]
-                             (let [value (int (.-target.value e))]
-                               (swap! app-state assoc :size value)))}]
-       size]]
-     (slider "Modulus" :modulus modulus)
+     (slider "Size" :size size {:type "range" :min 100 :max 1200 :step 100})
+     (slider "Modulus" :modulus modulus {:type "range" :min 2 :max 32 :step 1})
      [:p
       "© 2017 Charles L.G. Comstock "
       [:a {:href "https://github.com/dgtized/sierpinski-sieve"} "(github)"]]]))

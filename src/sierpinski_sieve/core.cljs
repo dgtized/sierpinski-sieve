@@ -3,7 +3,9 @@
             [reagent.core :as reagent :refer [atom]]))
 
 (enable-console-print!)
-(devtools/install!)
+
+(devtools/install! [:formatters :hints])
+(defn log [& args] (.log js/console args))
 
 (defonce app-state (atom {}))
 

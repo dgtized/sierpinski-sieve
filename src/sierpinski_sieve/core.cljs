@@ -9,10 +9,6 @@
 
 (defonce app-state (atom {}))
 
-(defn render-canvas []
-  (let [size 400]
-    [:center [:canvas {:width size :height size :id "canvas"}]]))
-
 (defn next-row [modulus row]
   (for [x (range 0 (inc (count row)))]
     (let [before (nth row (dec x) 0)
@@ -39,12 +35,19 @@
           (paint-row ctx y row size))
         (.fill ctx)))))
 
-(reagent/render [render-canvas]
-                (. js/document (getElementById "app")))
+(defn render-canvas [size]
+  (fn []
+    [:center [:canvas {:width size :height size :id "canvas"}]]))
+
+(defn main [size]
+  (reagent/render [(render-canvas size)]
+                  (. js/document (getElementById "app")))
+  (time (paint "canvas" size (take size (sieve '(1) 2)))))
+
+(main 400)
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-  (time (paint "canvas" 400 (take 400 (sieve '(1) 2))))
 )

@@ -19,13 +19,13 @@
     (.fill)))
 
 (defn next-row [modulus row]
-  (vec (for [x (range 0 (inc (count row)))]
-         (let [before (nth row (dec x) 0)
-               above (nth row x 0)]
-           (mod (+ before above) modulus)))))
+  (for [x (range 0 (inc (count row)))]
+    (let [before (nth row (dec x) 0)
+          above (nth row x 0)]
+      (mod (+ before above) modulus))))
 
 (defn sieve [initial-state modulus]
-  (iterate (partial next-row modulus) (vec initial-state)))
+  (iterate (partial next-row modulus) initial-state))
 
 (defn paint [canvas-id size sieve]
   (when-let [canvas-element (. js/document getElementById canvas-id)]
@@ -45,5 +45,5 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-  (paint "canvas" 400 (vec (take 400 (sieve '(1) 2))))
+  (paint "canvas" 400 (take 400 (sieve '(1) 2)))
 )

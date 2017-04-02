@@ -25,7 +25,7 @@
   (doseq [[x value] (map-indexed vector row)]
     (let [disp-x (+ (* (- size y) 0.5) x)]
       (if (odd? value)
-        (.rect ctx disp-x y 1 1)))))
+        (.fillRect ctx disp-x y 1 1)))))
 
 (defn paint [canvas-id size sieve]
   (when-let [canvas-element (. js/document getElementById canvas-id)]
@@ -35,8 +35,7 @@
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
         (doseq [[y row] (reverse (map-indexed vector sieve))]
-          (paint-row ctx y row size))
-        (.fill ctx)))))
+          (paint-row ctx y row size))))))
 
 (defn render-canvas [size]
   (fn []

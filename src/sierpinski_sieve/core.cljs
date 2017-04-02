@@ -14,7 +14,7 @@
         next (make-array size)]
     (aset next 0 1)
     (aset next (dec size) 1)
-    (doseq [x (range 1 (dec size))]
+    (forloop [(x 1) (< x (dec size)) (inc x)]
       (let [before (aget row (dec x))
             above (aget row x)]
         (aset next x (mod (+ before above) modulus))))

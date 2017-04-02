@@ -7,7 +7,9 @@
 (enable-console-print!)
 (defn log [& args] (.log js/console args))
 
-(defonce app-state (atom {:size 1000}))
+(defonce app-state
+  (atom {:size 1000
+         :modulus 2}))
 
 (defn next-row [modulus row]
   (let [size (inc (alength row))
@@ -40,8 +42,16 @@
         (doseq [[y row] (map-indexed vector sieve)]
           (paint-row ctx y row size))))))
 
+(defn slider [name key value]
+  [:div
+   [:label name
+    [:input {:type "range" :min 2 :max 32 :step 1 :value value
+             :on-change
+             (fn [e] (swap! app-state assoc key (int (.-target.value e))))}]
+    value]])
+
 (defn render-canvas []
-  (let [size (:size @app-state)]
+  (let [{:keys [size modulus]} @app-state]
     [:center
      [:h1 "Sierpinski Triangle"]
      [:canvas {:width size :height size :id "canvas"}]
@@ -50,17 +60,17 @@
        [:input {:type "range" :min 100 :max 1200 :step 100 :value size
                 :on-change (fn [e]
                              (let [value (int (.-target.value e))]
-                               (log value)
                                (swap! app-state assoc :size value)))}]
        size]]
+     (slider "Modulus" :modulus modulus)
      [:p
       "© 2017 Charles L.G. Comstock "
       [:a {:href "https://github.com/dgtized/sierpinski-sieve"} "(github)"]]]))
 
 (defn paint-canvas []
   (time
-   (let [size (:size @app-state)
-         triangle (time (doall (take size (sieve '(1) 2))))]
+   (let [{:keys [size modulus]} @app-state
+         triangle (time (doall (take size (sieve '(1) modulus))))]
      (time (paint "canvas" size triangle)))))
 
 (defn ui-component []

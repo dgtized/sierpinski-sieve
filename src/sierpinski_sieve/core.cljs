@@ -4,8 +4,6 @@
             [sierpinski-sieve.blit :as blit]))
 
 (enable-console-print!)
-
-(devtools/install! [:formatters :hints])
 (defn log [& args] (.log js/console args))
 
 (defonce app-state (atom {}))

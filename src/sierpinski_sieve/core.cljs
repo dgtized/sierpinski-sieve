@@ -42,7 +42,12 @@
 
 (defn render-canvas [size]
   (fn []
-    [:center [:canvas {:width size :height size :id "canvas"}]]))
+    [:center
+     [:h1 "Sierpinski Triangle"]
+     [:canvas {:width size :height size :id "canvas"}]
+     [:p
+      "© 2017 Charles L.G. Comstock "
+      [:a {:href "https://github.com/dgtized/sierpinski-sieve"} "(github)"]]]))
 
 (defn main [size]
   (reagent/render [(render-canvas size)]

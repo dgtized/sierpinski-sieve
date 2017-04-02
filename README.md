@@ -1,10 +1,13 @@
 # sierpinski-sieve
 
-FIXME: Write a one-line description of your library/project.
+Explore Sierpinski triangles in Clojurescript
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+https://dgtized.github.io/sierpinski-sieve
+
+Mostly an exploration of fast pixel manipulation from Clojurescript
+of the HTML5 Canvas API.
 
 ## Setup
 
@@ -42,6 +45,6 @@ get live reloading, nor a REPL.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright (C) 2017 Charles L.G. Comstock
 
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+Distributed under the MIT Public License, see LICENSE file

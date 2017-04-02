@@ -39,8 +39,8 @@
           (paint-row ctx y row size))
         (.fill ctx)))))
 
-(reagent/render-component [render-canvas]
-                          (. js/document (getElementById "app")))
+(reagent/render [render-canvas]
+                (. js/document (getElementById "app")))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

@@ -7,7 +7,7 @@
 (enable-console-print!)
 (defn log [& args] (.log js/console args))
 
-(defonce app-state (atom {}))
+(defonce app-state (atom {:size 1000}))
 
 (defn next-row [modulus row]
   (let [size (inc (alength row))
@@ -40,23 +40,37 @@
         (doseq [[y row] (map-indexed vector sieve)]
           (paint-row ctx y row size))))))
 
-(defn render-canvas [size]
-  (fn []
+(defn render-canvas []
+  (let [size (:size @app-state)]
     [:center
      [:h1 "Sierpinski Triangle"]
      [:canvas {:width size :height size :id "canvas"}]
+     [:div
+      [:label "Size"
+       [:input {:type "range" :min 100 :max 1200 :step 100 :value size
+                :on-change (fn [e]
+                             (let [value (int (.-target.value e))]
+                               (log value)
+                               (swap! app-state assoc :size value)))}]
+       size]]
      [:p
       "© 2017 Charles L.G. Comstock "
       [:a {:href "https://github.com/dgtized/sierpinski-sieve"} "(github)"]]]))
 
-(defn main [size]
-  (reagent/render [(render-canvas size)]
-                  (. js/document (getElementById "app")))
+(defn paint-canvas []
   (time
-   (let [triangle (time (doall (take size (sieve '(1) 2))))]
+   (let [size (:size @app-state)
+         triangle (time (doall (take size (sieve '(1) 2))))]
      (time (paint "canvas" size triangle)))))
 
-(main 1000)
+(defn ui-component []
+  (reagent/create-class
+   {:reagent-render render-canvas
+    :component-did-mount paint-canvas
+    :component-did-update paint-canvas}))
+
+(reagent/render [ui-component]
+                (. js/document (getElementById "app")))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

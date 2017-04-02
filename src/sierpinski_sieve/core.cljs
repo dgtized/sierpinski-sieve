@@ -34,9 +34,11 @@
         (set! (.-fillStyle ctx) "black")
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
-        (doseq [x (range (count sieve)) y (range (count sieve))]
-          (if (odd? (get-in sieve [x y] 0))
-            (put-pixel ctx x y)))))))
+        (doseq [[y row] (reverse (map-indexed vector sieve))
+                [x value] (map-indexed vector row)]
+          (let [disp-x (+ (* (- size y) 0.5) x)]
+            (if (odd? value)
+              (put-pixel ctx disp-x y))))))))
 
 (reagent/render-component [render-canvas]
                           (. js/document (getElementById "app")))

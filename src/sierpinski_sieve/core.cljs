@@ -1,7 +1,8 @@
 (ns sierpinski-sieve.core
   (:require [devtools.core :as devtools]
             [reagent.core :as reagent :refer [atom]]
-            [sierpinski-sieve.blit :as blit]))
+            [sierpinski-sieve.blit :as blit])
+  (:use-macros [sierpinski-sieve.macros :only [forloop]]))
 
 (enable-console-print!)
 (defn log [& args] (.log js/console args))
@@ -23,10 +24,11 @@
   (iterate (partial next-row modulus) (into-array initial-state)))
 
 (defn paint-row [ctx y row size]
-  (doseq [[x value] (map-indexed vector row)]
-    (let [disp-x (+ (* (- size y) 0.5) x)]
-      (if (odd? value)
-        (.fillRect ctx disp-x y 1 1)))))
+  (forloop [(x 0) (< x (count row)) (inc x)]
+     (let [disp-x (+ (* (- size y) 0.5) x)
+           value (aget row x)]
+       (if (odd? value)
+         (.fillRect ctx disp-x y 1 1)))))
 
 (defn paint [canvas-id size sieve]
   (when-let [canvas-element (. js/document getElementById canvas-id)]

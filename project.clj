@@ -1,4 +1,4 @@
-(defproject sierpinski-sieve "0.1.0-SNAPSHOT"
+(defproject sierpinski-sieve "0.1.0"
   :description "Sierpinski Triangles on HTML/Canvas"
   :url "https://github.com/dgtized/sierpinski-sieve"
   :license {:name "MIT Public License"

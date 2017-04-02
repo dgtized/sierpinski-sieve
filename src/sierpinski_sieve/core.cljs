@@ -18,16 +18,25 @@
     (.rect x y 1 1)
     (.fill)))
 
-(defn paint [canvas-id size]
+(defn next-row [modulus row]
+  (vec (for [x (range 0 (inc (count row)))]
+         (let [before (nth row (dec x) 0)
+               above (nth row x 0)]
+           (mod (+ before above) modulus)))))
+
+(defn sieve [initial-state modulus]
+  (iterate (partial next-row modulus) (vec initial-state)))
+
+(defn paint [canvas-id size sieve]
   (when-let [canvas-element (. js/document getElementById canvas-id)]
     (when-let [ctx (.getContext canvas-element "2d")]
       (do
         (set! (.-fillStyle ctx) "black")
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
-        (doseq [x (range 100)
-                y (range 10)]
-          (put-pixel ctx x y))))))
+        (doseq [x (range (count sieve)) y (range (count sieve))]
+          (if (odd? (get-in sieve [x y] 0))
+            (put-pixel ctx x y)))))))
 
 (reagent/render-component [render-canvas]
                           (. js/document (getElementById "app")))
@@ -36,5 +45,5 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-  (paint "canvas" 400)
+  (paint "canvas" 400 (vec (take 400 (sieve '(1) 2))))
 )

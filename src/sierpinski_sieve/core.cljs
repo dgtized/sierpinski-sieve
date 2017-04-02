@@ -10,11 +10,12 @@
 (defonce app-state (atom {}))
 
 (defn next-row [modulus row]
-  (cons 1
-        (for [x (range 1 (inc (count row)))]
-          (let [before (nth row (dec x))
-                above (nth row x 0)]
-            (mod (+ before above) modulus)))))
+  (into-array
+   (cons 1
+         (for [x (range 1 (inc (count row)))]
+           (let [before (nth row (dec x))
+                 above (nth row x 0)]
+             (mod (+ before above) modulus))))))
 
 (defn sieve [initial-state modulus]
   (iterate (partial next-row modulus) initial-state))

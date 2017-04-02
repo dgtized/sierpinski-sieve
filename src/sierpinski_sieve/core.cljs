@@ -51,7 +51,7 @@
    (let [triangle (time (doall (take size (sieve '(1) 2))))]
      (time (paint "canvas" size triangle)))))
 
-(main 325)
+(main 1000)
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

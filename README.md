@@ -28,15 +28,7 @@ To create a production build run:
 And open your browser in `resources/public/index.html`. You will not
 get live reloading, nor a REPL. 
 
-### Emacs Cider
-
-```elisp
-(require 'cider)
-(setq cider-cljs-lein-repl
-      "(do (require 'figwheel-sidecar.repl-api)
-           (figwheel-sidecar.repl-api/start-figwheel!)
-           (figwheel-sidecar.repl-api/cljs-repl))")
-```
+See also https://github.com/binaryage/cljs-devtools
 
 ## License
 

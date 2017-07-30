@@ -33,7 +33,7 @@
          (.fillRect ctx disp-x y 1 1)))))
 
 (defn paint [canvas-id size sieve]
-  (when-let [canvas-element (. js/document getElementById canvas-id)]
+  (when-let [canvas-element (.getElementById js/document canvas-id)]
     (when-let [ctx (.getContext canvas-element "2d")]
       (do
         (set! (.-fillStyle ctx) "black")
@@ -74,8 +74,7 @@
     :component-did-mount paint-canvas
     :component-did-update paint-canvas}))
 
-(reagent/render [ui-component]
-                (. js/document (getElementById "app")))
+(reagent/render [ui-component] (.getElementById js/document "app"))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

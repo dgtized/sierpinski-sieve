@@ -12,7 +12,7 @@
           (aset pixel-data (+ p 3) 0))))))
 
 (defn paint [canvas-id size sieve]
-  (when-let [canvas-element (. js/document getElementById canvas-id)]
+  (when-let [canvas-element (.getElementById js/document canvas-id)]
     (when-let [ctx (.getContext canvas-element "2d")]
       (let [pixels (.createImageData ctx size size)
             pixel-data (.-data pixels)]

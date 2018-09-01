@@ -1,6 +1,5 @@
 (ns sierpinski-sieve.core
-  (:require [devtools.core :as devtools]
-            [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as reagent :refer [atom]]
             [sierpinski-sieve.blit :as blit])
   (:use-macros [sierpinski-sieve.macros :only [forloop]]))
 

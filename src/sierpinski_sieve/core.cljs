@@ -58,7 +58,7 @@
      (slider "Size" :size size {:type "range" :min 100 :max 1200 :step 100})
      (slider "Modulus" :modulus modulus {:type "range" :min 2 :max 32 :step 1})
      [:p
-      "© 2017 Charles L.G. Comstock "
+      "© 2017-2018 Charles L.G. Comstock "
       [:a {:href "https://github.com/dgtized/sierpinski-sieve"} "(github)"]]]))
 
 (defn paint-canvas []

@@ -32,6 +32,6 @@ See also https://github.com/binaryage/cljs-devtools
 
 ## License
 
-Copyright (C) 2017 Charles L.G. Comstock
+Copyright (C) 2017-2018 Charles L.G. Comstock
 
 Distributed under the MIT Public License, see LICENSE file

@@ -4,7 +4,7 @@
   :license {:name "MIT Public License"
             :url "https://opensource.org/licenses/MIT"}
 
-  :min-lein-version "2.7.1"
+  :min-lein-version "2.9.1"
 
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.520"]

@@ -95,11 +95,11 @@
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
                                   [figwheel-sidecar "0.5.18"]
-                                  [com.cemerick/piggieback "0.2.2"]]
+                                  [cider/piggieback "0.4.0"]]
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
-                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
+                   :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}}
 
   )

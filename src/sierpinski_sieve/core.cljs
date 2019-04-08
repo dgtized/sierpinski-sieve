@@ -25,11 +25,11 @@
   (iterate (partial next-row modulus) (into-array initial-state)))
 
 (defn paint-row [ctx y row size]
-  (forloop [(x 0) (< x (alength row)) (inc x)]
-     (let [disp-x (+ (* (- size y) 0.5) x)
-           value (aget row x)]
-       (if (odd? value)
-         (.fillRect ctx disp-x y 1 1)))))
+  (dotimes [x (alength row)]
+    (let [disp-x (+ (* (- size y) 0.5) x)
+          value (aget row x)]
+      (if (odd? value)
+        (.fillRect ctx disp-x y 1 1)))))
 
 (defn paint [canvas-id size sieve]
   (when-let [canvas-element (.getElementById js/document canvas-id)]

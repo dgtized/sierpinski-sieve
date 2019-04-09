@@ -38,8 +38,8 @@
         (set! (.-fillStyle ctx) "black")
         (.fillRect ctx 0 0 size size)
         (set! (.-fillStyle ctx) "white")
-        (doseq [[y row] (map-indexed vector sieve)]
-          (paint-row ctx y row size))))))
+        (dotimes [y size]
+          (paint-row ctx y (aget sieve y) size))))))
 
 (defn slider [name key value settings]
   [:div
@@ -64,7 +64,7 @@
 (defn paint-canvas []
   (time
    (let [{:keys [size modulus]} @app-state
-         triangle (time (doall (take size (sieve '(1) modulus))))]
+         triangle (time (into-array (take size (sieve '(1) modulus))))]
      (time (paint "canvas" size triangle)))))
 
 (defn ui-component []

@@ -1,8 +1,8 @@
 (ns sierpinski-sieve.core
   (:require [reagent.core :as reagent]
             [reagent.dom :as rdom]
-            [sierpinski-sieve.blit :as blit])
-  (:use-macros [sierpinski-sieve.macros :only [forloop]]))
+            [sierpinski-sieve.macros :include-macros true :refer [forloop]]
+            [sierpinski-sieve.blit :as blit]))
 
 (enable-console-print!)
 (defn log [& args] (.log js/console args))

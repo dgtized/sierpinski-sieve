@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 rm -rf resources/public/.git
-lein do clean, cljsbuild once min
+clojure -m figwheel.main --build-once release
 
 pushd resources/public
 git init

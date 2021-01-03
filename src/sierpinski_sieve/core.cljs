@@ -1,5 +1,6 @@
 (ns sierpinski-sieve.core
-  (:require [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as reagent]
+            [reagent.dom :as rdom]
             [sierpinski-sieve.blit :as blit])
   (:use-macros [sierpinski-sieve.macros :only [forloop]]))
 
@@ -7,8 +8,8 @@
 (defn log [& args] (.log js/console args))
 
 (defonce app-state
-  (atom {:size 1000
-         :modulus 2}))
+  (reagent/atom {:size 1000
+                 :modulus 2}))
 
 (defn next-row [modulus row]
   (let [size (inc (alength row))
@@ -73,7 +74,7 @@
     :component-did-mount paint-canvas
     :component-did-update paint-canvas}))
 
-(reagent/render [ui-component] (.getElementById js/document "app"))
+(rdom/render [ui-component] (.getElementById js/document "app"))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

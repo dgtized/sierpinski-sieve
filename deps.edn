@@ -1,0 +1,6 @@
+{:deps {org.clojure/clojurescript {:mvn/version "1.10.773"}
+        reagent/reagent {:mvn/version "1.0.0"}
+        ;; This is not dev only because of production build
+        com.bhauman/figwheel-main {:mvn/version "0.2.12"}
+        }
+ :paths ["src" "target" "resources"]}

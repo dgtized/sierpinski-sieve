@@ -1,8 +1,7 @@
 (ns sierpinski-sieve.core
   (:require [reagent.core :as reagent]
             [reagent.dom :as rdom]
-            [sierpinski-sieve.macros :include-macros true :refer [forloop]]
-            [sierpinski-sieve.blit :as blit]))
+            [sierpinski-sieve.macros :include-macros true :refer [forloop]]))
 
 (enable-console-print!)
 (defn log [& args] (.log js/console args))
@@ -29,18 +28,17 @@
   (dotimes [x (alength row)]
     (let [disp-x (+ (* (- size y) 0.5) x)
           value (aget row x)]
-      (if (odd? value)
+      (when (odd? value)
         (.fillRect ctx disp-x y 1 1)))))
 
 (defn paint [canvas-id size sieve]
   (when-let [canvas-element (.getElementById js/document canvas-id)]
     (when-let [ctx (.getContext canvas-element "2d")]
-      (do
-        (set! (.-fillStyle ctx) "black")
-        (.fillRect ctx 0 0 size size)
-        (set! (.-fillStyle ctx) "white")
-        (dotimes [y size]
-          (paint-row ctx y (aget sieve y) size))))))
+      (set! (.-fillStyle ctx) "black")
+      (.fillRect ctx 0 0 size size)
+      (set! (.-fillStyle ctx) "white")
+      (dotimes [y size]
+        (paint-row ctx y (aget sieve y) size)))))
 
 (defn slider [name key value settings]
   [:div

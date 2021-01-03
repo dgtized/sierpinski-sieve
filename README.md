@@ -27,6 +27,6 @@ To build and publish a production deploy:
 
 ## License
 
-Copyright (C) 2017-2019 Charles L.G. Comstock
+Copyright (C) 2017-2021 Charles L.G. Comstock
 
 Distributed under the MIT Public License, see LICENSE file

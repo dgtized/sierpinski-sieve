@@ -11,24 +11,19 @@ of the HTML5 Canvas API.
 
 ## Setup
 
+Install the [Clojure CLI Tools](https://clojure.org/guides/getting_started)
+
 To get an interactive development environment run:
 
-    lein figwheel
+    clojure -m figwheel.main -b dev -r
 
-and open your browser at [localhost:3449](http://localhost:3449/).
+For an optimized production build:
 
-To clean all compiled files:
+    clojure -m figwheel.main -bo release
 
-    lein clean
+To build and publish a production deploy:
 
-To create a production build run:
-
-    lein do clean, cljsbuild once min
-
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL. 
-
-See also https://github.com/binaryage/cljs-devtools
+    bin/publish.sh
 
 ## License
 

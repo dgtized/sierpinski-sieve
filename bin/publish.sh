@@ -6,7 +6,6 @@ function cleanup() {
 
 cleanup
 
-rm -rf resources/public/.git
 clojure -m figwheel.main --build-once release
 
 mkdir -p resources/public/js

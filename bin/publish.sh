@@ -6,7 +6,7 @@ function cleanup() {
 
 cleanup
 
-clojure -m figwheel.main --build-once release
+clojure -Mdev -m figwheel.main --build-once release
 
 mkdir -p resources/public/js
 cp target/public/js/sierpinsky_sieve.* resources/public/js

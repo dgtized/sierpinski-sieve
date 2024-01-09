@@ -1,4 +1,4 @@
-{:deps {org.clojure/clojurescript {:mvn/version "1.11.60"}
+{:deps {org.clojure/clojurescript {:mvn/version "1.11.121"}
 
         cljsjs/react {:mvn/version "18.2.0-1"}
         cljsjs/react-dom {:mvn/version "18.2.0-1"}

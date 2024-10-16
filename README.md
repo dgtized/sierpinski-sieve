@@ -21,10 +21,6 @@ For an optimized production build:
 
     clojure -m figwheel.main -bo release
 
-To build and publish a production deploy:
-
-    bin/publish.sh
-
 ## License
 
 Copyright (C) 2017-2024 Charles L.G. Comstock

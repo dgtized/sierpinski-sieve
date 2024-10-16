@@ -5,7 +5,12 @@
         reagent/reagent {:mvn/version "1.2.0"}}
  :paths ["src" "resources"]
  :aliases
- {:dev
+ {:fig
   {:extra-deps
-   {com.bhauman/figwheel-main {:mvn/version "0.2.18"}}
-   :extra-paths ["target"]}}}
+   {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
+    com.bhauman/figwheel-main {:mvn/version "0.2.18"}}
+   :extra-paths ["target"]}
+  ;; clj -Mclj-kondo --lint src
+  :clj-kondo
+  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2024.09.27"}}
+   :main-opts ["-m" "clj-kondo.main"]}}}

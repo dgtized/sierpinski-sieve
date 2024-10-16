@@ -1,0 +1,91 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache deps.edn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: clj-${{ runner.os }}-${{ hashFiles('**/deps.edn') }}
+          restore-keys: clj-${{ runner.os }}-
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@12.5
+        with:
+          cli: latest
+          bb: latest
+
+      - name: Lint
+        run: clojure -M:clj-kondo --lint src test
+
+  publish:
+    name: Publish
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache deps.edn dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: clj-${{ runner.os }}-${{ hashFiles('**/deps.edn') }}
+          restore-keys: clj-${{ runner.os }}-
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@12.5
+        with:
+          cli: latest
+          bb: latest
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        run: bb build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'static-site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,6 +1,6 @@
 {:main sierpinski-sieve.core
  :clean-outputs true
  :optimizations :advanced
- :output-to "target/public/js/sierpinsky_sieve.js"
- :output-dir "target/public/js"
- :source-map "target/public/js/sierpinsky_sieve.js.map"}
+ :fingerprint true
+ :source-map-timestamp true
+ :source-map "target/public/cljs-out/release-main.js.map"}

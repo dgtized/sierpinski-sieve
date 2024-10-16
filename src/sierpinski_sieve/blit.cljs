@@ -8,7 +8,7 @@
     (doseq [[x value] (map-indexed vector row)]
       (let [disp-x (+ (int (* (- size y) 0.5)) x)
             p (* (+ y-offset disp-x) 4)]
-        (if (odd? value)
+        (when (odd? value)
           (aset pixel-data (+ p 3) 0))))))
 
 (defn paint [canvas-id size sieve]

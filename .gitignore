@@ -14,3 +14,4 @@ pom.xml
 .cljs_rhino_repl/*
 /.cpcache/
 /static-site/
+/.clj-kondo/.cache/

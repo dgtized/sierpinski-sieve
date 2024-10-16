@@ -76,9 +76,6 @@ jobs:
           cli: latest
           bb: latest
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Build
         run: bb build
 
@@ -102,6 +99,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

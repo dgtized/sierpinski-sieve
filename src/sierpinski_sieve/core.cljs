@@ -55,10 +55,7 @@
      [:h1 "Sierpinski Triangle"]
      [:canvas {:width size :height size :id "canvas"}]
      (slider "Size" :size size {:type "range" :min 100 :max 1200 :step 100})
-     (slider "Modulus" :modulus modulus {:type "range" :min 2 :max 32 :step 1})
-     [:p
-      "© 2017-2024 Charles L.G. Comstock "
-      [:a {:href "https://github.com/dgtized/sierpinski-sieve"} "(github)"]]]))
+     (slider "Modulus" :modulus modulus {:type "range" :min 2 :max 32 :step 1})]))
 
 (defn paint-canvas []
   (time

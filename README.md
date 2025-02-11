@@ -23,6 +23,6 @@ For an optimized production build:
 
 ## License
 
-Copyright (C) 2017-2024 Charles L.G. Comstock
+Copyright (C) 2017-2025 Charles L.G. Comstock
 
 Distributed under the MIT Public License, see LICENSE file

@@ -1,10 +1,13 @@
 {:paths ["src"]
+ :deps {io.github.dgtized/carrier
+        {:git/url "https://github.com/dgtized/carrier.git"
+         :git/sha "37b6acc4c2e4dad0971b150c1a99f666e92a996f"}}
  :tasks
  {:requires ([babashka.fs :as fs]
-             [bb.tasks :as t])
+             [carrier.tasks :as t])
   clean
   {:task (do (println "Remove target directory")
-             (fs/delete-tree "target"))}
+          (fs/delete-tree "target"))}
   compile
   {:depends [clean]
    :task (clojure "-Mfig -m figwheel.main -bo release")}

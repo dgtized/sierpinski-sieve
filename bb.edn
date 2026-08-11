@@ -8,6 +8,10 @@
   clean
   {:task (do (println "Remove target directory")
           (fs/delete-tree "target"))}
+  lint
+  {:doc "Lint source and test with clj-kondo"
+   :task (clojure "-Mclj-kondo --parallel --lint src")}
+
   compile
   {:depends [clean]
    :task (clojure "-Mfig -m figwheel.main -bo release")}

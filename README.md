@@ -15,11 +15,11 @@ Install the [Clojure CLI Tools](https://clojure.org/guides/getting_started)
 
 To get an interactive development environment run:
 
-    clojure -m figwheel.main -b dev -r
+    clojure -Mfig -m figwheel.main -b dev -r
 
 For an optimized production build:
 
-    clojure -m figwheel.main -bo release
+    clojure -Mfig -m figwheel.main -bo release
 
 ## License
 
